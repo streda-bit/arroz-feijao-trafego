@@ -30,13 +30,13 @@
 
     /* HERO */
     .hero {
-      min-height: 100svh;
+      min-height: auto;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 60px 24px 48px;
+      padding: 40px 24px 24px;
       position: relative;
       overflow: hidden;
     }
@@ -57,19 +57,19 @@
     }
     .hero-title {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(64px, 18vw, 120px);
+      font-size: clamp(48px, 14vw, 90px);
       line-height: 0.92;
       letter-spacing: 0.01em;
       color: var(--branco);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
     .hero-title span { color: var(--laranja); }
     .hero-desc {
-      font-size: 15px;
+      font-size: 14px;
       color: #BBBBBB;
       max-width: 340px;
-      margin: 24px 0 36px;
-      line-height: 1.7;
+      margin: 12px 0 20px;
+      line-height: 1.6;
     }
     .hero-desc strong { color: var(--branco); }
     .btn-primary {
@@ -240,13 +240,17 @@
     <p class="hero-desc">
       Essas aulas são pra você, <strong>empreendedor</strong> que ainda não tem como investir num gestor de tráfego ou agência.
     </p>
-    <a href="#cadastro" class="btn-primary" style="max-width:340px;">Quero garantir minha vaga</a>
+    <div style="background:rgba(212,80,10,0.12);border:1px solid rgba(212,80,10,0.35);border-radius:8px;padding:12px 20px;margin-bottom:4px;text-align:center;">
+      <p style="font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--laranja);margin-bottom:4px;">📅 Data das aulas</p>
+      <p style="font-size:16px;font-weight:700;color:var(--branco);">12 de setembro de 2026</p>
+      <p style="font-size:13px;color:#AAAAAA;">a partir das 09h da manhã</p>
+    </div>
   </section>
 
   <div class="divisor"></div>
 
   <!-- VIDEO -->
-  <section class="section reveal">
+  <section class="section reveal" style="padding-top:32px;">
     <p class="section-label">Antes de tudo</p>
     <h2 class="section-title">ASSISTE ESSE VÍDEO</h2>
     <p class="section-body">Em alguns minutos eu te explico exatamente o que você vai aprender e pra quem essas aulas são feitas.</p>
@@ -287,11 +291,48 @@
 
   <div class="divisor"></div>
 
+  <!-- ENTREGÁVEIS -->
+  <section class="section reveal">
+    <p class="section-label">O que você leva</p>
+    <h2 class="section-title">ALÉM DAS AULAS</h2>
+    <div style="display:flex;flex-direction:column;gap:12px;margin-top:24px;">
+      <div style="display:flex;align-items:flex-start;gap:14px;background:var(--cinza-medio);border-left:3px solid var(--laranja);border-radius:0 6px 6px 0;padding:14px 16px;">
+        <span style="font-size:20px;flex-shrink:0;margin-top:2px;">🤖</span>
+        <p style="font-size:14px;color:#CCCCCC;line-height:1.5;"><strong style="color:var(--branco);display:block;margin-bottom:2px;">Prompt de IA para Reels</strong>Gera roteiros de Reels para qualquer modelo de negócio — só copiar, ajustar e gravar.</p>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:14px;background:var(--cinza-medio);border-left:3px solid var(--laranja);border-radius:0 6px 6px 0;padding:14px 16px;">
+        <span style="font-size:20px;flex-shrink:0;margin-top:2px;">🎯</span>
+        <p style="font-size:14px;color:#CCCCCC;line-height:1.5;"><strong style="color:var(--branco);display:block;margin-bottom:2px;">Prompt de IA para definir seu ICP</strong>Descubra exatamente quem é o seu cliente ideal com ajuda de inteligência artificial.</p>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:14px;background:var(--cinza-medio);border-left:3px solid var(--laranja);border-radius:0 6px 6px 0;padding:14px 16px;">
+        <span style="font-size:20px;flex-shrink:0;margin-top:2px;">📊</span>
+        <p style="font-size:14px;color:#CCCCCC;line-height:1.5;"><strong style="color:var(--branco);display:block;margin-bottom:2px;">IA para campanhas e estratégias</strong>Auxílio de IA para montar campanhas de tráfego e estratégias de marketing com mais precisão.</p>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:14px;background:var(--cinza-medio);border-left:3px solid var(--laranja);border-radius:0 6px 6px 0;padding:14px 16px;">
+        <span style="font-size:20px;flex-shrink:0;margin-top:2px;">📄</span>
+        <p style="font-size:14px;color:#CCCCCC;line-height:1.5;"><strong style="color:var(--branco);display:block;margin-bottom:2px;">Material complementar das aulas</strong>Guia completo pra consultar depois das aulas e não depender só da memória.</p>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:14px;background:var(--cinza-medio);border-left:3px solid var(--laranja);border-radius:0 6px 6px 0;padding:14px 16px;">
+        <span style="font-size:20px;flex-shrink:0;margin-top:2px;">📅</span>
+        <p style="font-size:14px;color:#CCCCCC;line-height:1.5;"><strong style="color:var(--branco);display:block;margin-bottom:2px;">Encontro no Meet após 30 dias</strong>Um mês depois das aulas, a gente se reúne pra trocar ideia sobre como estão indo os projetos.</p>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:14px;background:var(--cinza-medio);border-left:3px solid var(--laranja);border-radius:0 6px 6px 0;padding:14px 16px;">
+        <span style="font-size:20px;flex-shrink:0;margin-top:2px;">💬</span>
+        <p style="font-size:14px;color:#CCCCCC;line-height:1.5;"><strong style="color:var(--branco);display:block;margin-bottom:2px;">Grupo de networking dos alunos</strong>Acesso a um grupo exclusivo pra tirar dúvidas comigo 24h por dia.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divisor"></div>
+
   <!-- PREÇO -->
   <section class="section reveal">
     <p class="section-label">Investimento</p>
     <h2 class="section-title">QUANTO CUSTA?</h2>
     <div style="background:var(--cinza-medio);border-radius:10px;padding:28px 24px;border:1px solid #333;text-align:center;">
+      <div style="display:inline-block;background:rgba(212,80,10,0.15);border:1px solid rgba(212,80,10,0.4);border-radius:20px;padding:6px 16px;margin-bottom:12px;">
+        <span style="font-size:12px;font-weight:700;color:var(--laranja);letter-spacing:0.08em;text-transform:uppercase;">⚡ Apenas 4 vagas disponíveis</span>
+      </div>
       <p style="font-family:'Bebas Neue',sans-serif;font-size:72px;line-height:1;color:var(--branco);"><span style="font-size:32px;color:var(--laranja);vertical-align:super;">R$</span>999</p>
       <p style="font-size:12px;color:var(--cinza-texto);margin-top:4px;margin-bottom:20px;">à vista no Pix · parcelamento disponível</p>
       <p style="font-size:14px;color:#AAAAAA;line-height:1.6;">Se estiver tudo certo com o valor, desce e deixa seu contato. Eu entro em contato pra te passar todos os detalhes e formas de pagamento.</p>
@@ -320,6 +361,11 @@
         <div class="field">
           <label for="whatsapp">WhatsApp</label>
           <input type="tel" id="whatsapp" name="whatsapp" placeholder="(00) 00000-0000" required />
+        </div>
+
+        <div class="field">
+          <label for="duvidas">Qual sua maior dúvida?</label>
+          <textarea id="duvidas" name="duvidas" placeholder="Me conta o que você quer entender melhor sobre tráfego pago..." style="width:100%;background:var(--cinza-escuro);border:1px solid #333;border-radius:6px;padding:14px 16px;font-size:15px;color:var(--branco);font-family:'Inter',sans-serif;outline:none;resize:vertical;min-height:90px;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--laranja)'" onblur="this.style.borderColor='#333'"></textarea>
         </div>
 
         <div class="field" style="display:flex;align-items:flex-start;gap:12px;margin-top:8px;">
