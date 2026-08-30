@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arroz, Feijão e Tráfego</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --laranja: #D4500A;
+      --laranja-claro: #F26419;
+      --preto: #111111;
+      --cinza-escuro: #1C1C1C;
+      --cinza-medio: #2A2A2A;
+      --cinza-texto: #888888;
+      --branco: #FFFFFF;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--preto);
+      color: var(--branco);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 60px 24px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(212,80,10,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--laranja);
+      margin-bottom: 20px;
+    }
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(64px, 18vw, 120px);
+      line-height: 0.92;
+      letter-spacing: 0.01em;
+      color: var(--branco);
+      margin-bottom: 8px;
+    }
+    .hero-title span { color: var(--laranja); }
+    .hero-desc {
+      font-size: 15px;
+      color: #BBBBBB;
+      max-width: 340px;
+      margin: 24px 0 36px;
+      line-height: 1.7;
+    }
+    .hero-desc strong { color: var(--branco); }
+    .btn-primary {
+      display: inline-block;
+      background: var(--laranja);
+      color: var(--branco);
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 16px 36px;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      border: none;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      width: 100%;
+    }
+    .btn-primary:hover { background: var(--laranja-claro); transform: translateY(-2px); }
+
+    /* DIVISOR */
+    .divisor {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--laranja) 50%, transparent);
+      margin: 0 24px;
+      opacity: 0.35;
+    }
+
+    /* SEÇÕES */
+    .section {
+      padding: 64px 24px;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--laranja);
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(32px, 9vw, 52px);
+      line-height: 1;
+      color: var(--branco);
+      margin-bottom: 20px;
+    }
+    .section-body { font-size: 15px; color: #BBBBBB; line-height: 1.75; }
+    .section-body strong { color: var(--branco); }
+
+    /* VIDEO */
+    .video-wrap {
+      margin-top: 36px;
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--cinza-medio);
+      aspect-ratio: 9/16;
+      max-height: 560px;
+      border: 1px solid #2A2A2A;
+      position: relative;
+    }
+    .video-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+    .video-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      gap: 12px;
+      color: #555;
+    }
+    .video-placeholder p { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+
+    /* PARA QUEM */
+    .lista-pra-quem { margin-top: 28px; display: flex; flex-direction: column; gap: 14px; }
+    .item-pra-quem {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: var(--cinza-medio);
+      border-left: 3px solid var(--laranja);
+      border-radius: 0 6px 6px 0;
+      padding: 14px 16px;
+    }
+    .item-pra-quem .icon { font-size: 20px; line-height: 1; flex-shrink: 0; margin-top: 2px; }
+    .item-pra-quem p { font-size: 14px; color: #CCCCCC; line-height: 1.5; }
+    .item-pra-quem p strong { color: var(--branco); }
+
+    /* FORMULÁRIO */
+    .form-box {
+      background: var(--cinza-medio);
+      border-radius: 10px;
+      padding: 32px 24px;
+      border: 1px solid #333;
+      margin-top: 28px;
+    }
+    .form-box p.form-intro {
+      font-size: 14px;
+      color: #AAAAAA;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+    .form-box p.form-intro strong { color: var(--branco); }
+    .field {
+      margin-bottom: 16px;
+    }
+    .field label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cinza-texto);
+      margin-bottom: 8px;
+    }
+    .field input {
+      width: 100%;
+      background: var(--cinza-escuro);
+      border: 1px solid #333;
+      border-radius: 6px;
+      padding: 14px 16px;
+      font-size: 15px;
+      color: var(--branco);
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .field input:focus { border-color: var(--laranja); }
+    .field input::placeholder { color: #555; }
+
+    .form-sucesso {
+      display: none;
+      text-align: center;
+      padding: 24px 0;
+    }
+    .form-sucesso .icon-ok { font-size: 48px; margin-bottom: 12px; }
+    .form-sucesso h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      color: var(--laranja);
+      margin-bottom: 8px;
+    }
+    .form-sucesso p { font-size: 14px; color: #AAAAAA; line-height: 1.6; }
+
+    /* RODAPÉ */
+    footer { text-align: center; padding: 40px 24px; font-size: 11px; color: #444; letter-spacing: 0.05em; }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-eyebrow">Vagas Limitadas</p>
+    <h1 class="hero-title">ARROZ,<br>FEIJÃO<br><span>E TRÁFEGO</span></h1>
+    <p class="hero-desc">
+      Essas aulas são pra você, <strong>empreendedor</strong> que ainda não tem como investir num gestor de tráfego ou agência.
+    </p>
+    <a href="#cadastro" class="btn-primary" style="max-width:340px;">Quero garantir minha vaga</a>
+  </section>
+
+  <div class="divisor"></div>
+
+  <!-- VIDEO -->
+  <section class="section reveal">
+    <p class="section-label">Antes de tudo</p>
+    <h2 class="section-title">ASSISTE ESSE VÍDEO</h2>
+    <p class="section-body">Em alguns minutos eu te explico exatamente o que você vai aprender e pra quem essas aulas são feitas.</p>
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/4HQ8z1GcDJw?rel=0&playsinline=1" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+    </div>
+  </section>
+
+  <div class="divisor"></div>
+
+  <!-- PARA QUEM -->
+  <section class="section reveal">
+    <p class="section-label">Para quem é</p>
+    <h2 class="section-title">ESSAS AULAS SÃO PRA VOCÊ?</h2>
+    <div class="lista-pra-quem">
+      <div class="item-pra-quem">
+        <span class="icon">🏪</span>
+        <p><strong>Você é empreendedor</strong> e ainda não consegue investir num gestor ou agência.</p>
+      </div>
+      <div class="item-pra-quem">
+        <span class="icon">😤</span>
+        <p><strong>Você já tentou cursinho barato</strong> mas continua perdido dentro do gerenciador.</p>
+      </div>
+      <div class="item-pra-quem">
+        <span class="icon">💡</span>
+        <p><strong>Você quer reduzir custos</strong> e fazer o tráfego por conta própria — porque entende que é necessário pra crescer o negócio.</p>
+      </div>
+      <div class="item-pra-quem">
+        <span class="icon">📱</span>
+        <p><strong>Você quer gerar conversa no WhatsApp</strong> e seguidores no Instagram sem depender só de orgânico.</p>
+      </div>
+      <div class="item-pra-quem">
+        <span class="icon">🧠</span>
+        <p><strong>Você quer entender tráfego</strong> de verdade — saber o que está funcionando e por quê.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divisor"></div>
+
+  <!-- PREÇO -->
+  <section class="section reveal">
+    <p class="section-label">Investimento</p>
+    <h2 class="section-title">QUANTO CUSTA?</h2>
+    <div style="background:var(--cinza-medio);border-radius:10px;padding:28px 24px;border:1px solid #333;text-align:center;">
+      <p style="font-family:'Bebas Neue',sans-serif;font-size:72px;line-height:1;color:var(--branco);"><span style="font-size:32px;color:var(--laranja);vertical-align:super;">R$</span>999</p>
+      <p style="font-size:12px;color:var(--cinza-texto);margin-top:4px;margin-bottom:20px;">à vista no Pix · parcelamento disponível</p>
+      <p style="font-size:14px;color:#AAAAAA;line-height:1.6;">Se estiver tudo certo com o valor, desce e deixa seu contato. Eu entro em contato pra te passar todos os detalhes e formas de pagamento.</p>
+    </div>
+  </section>
+
+  <div class="divisor"></div>
+
+  <!-- FORMULÁRIO -->
+  <section class="section reveal" id="cadastro">
+    <p class="section-label">Garanta sua vaga</p>
+    <h2 class="section-title">DEIXA SEU CONTATO</h2>
+    <div class="form-box">
+      <p class="form-intro">Preenche aí que eu entro em contato pra te passar todos os detalhes. <strong>Sem spam, sem enrolação.</strong></p>
+
+      <form id="form-lead" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="36c33878-46b2-4abe-9edb-8d35fc097373" />
+        <input type="hidden" name="subject" value="Nova vaga — Arroz, Feijão e Tráfego" />
+        <input type="hidden" name="redirect" value="false" />
+
+        <div class="field">
+          <label for="nome">Seu nome</label>
+          <input type="text" id="nome" name="nome" placeholder="Como você se chama?" required />
+        </div>
+
+        <div class="field">
+          <label for="whatsapp">WhatsApp</label>
+          <input type="tel" id="whatsapp" name="whatsapp" placeholder="(00) 00000-0000" required />
+        </div>
+
+        <div class="field" style="display:flex;align-items:flex-start;gap:12px;margin-top:8px;">
+          <input type="checkbox" id="aceite" name="aceite" required style="width:18px;height:18px;margin-top:2px;flex-shrink:0;accent-color:var(--laranja);" />
+          <label for="aceite" style="font-size:13px;color:#AAAAAA;text-transform:none;letter-spacing:0;line-height:1.5;">Estou ciente que o investimento é de <strong style="color:var(--branco);">R$999</strong> e quero saber mais sobre as formas de pagamento</label>
+        </div>
+        <button type="submit" class="btn-primary" id="btn-submit" style="margin-top:16px;">Quero garantir minha vaga</button>
+      </form>
+
+      <div class="form-sucesso" id="form-sucesso">
+        <div class="icon-ok">✅</div>
+        <h3>Cadastro recebido!</h3>
+        <p>Boa! Vou entrar em contato em breve pelo WhatsApp pra te passar todos os detalhes.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Arroz, Feijão e Tráfego &nbsp;·&nbsp; Juliano Streda
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Formulário via Web3Forms
+    document.getElementById('form-lead').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btn-submit');
+      btn.textContent = 'Enviando...';
+      btn.disabled = true;
+
+      const formData = new FormData(this);
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await res.json();
+        if (data.success) {
+          document.getElementById('form-lead').style.display = 'none';
+          document.getElementById('form-sucesso').style.display = 'block';
+        } else {
+          btn.textContent = 'Erro, tenta de novo';
+          btn.disabled = false;
+        }
+      } catch {
+        btn.textContent = 'Erro, tenta de novo';
+        btn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
