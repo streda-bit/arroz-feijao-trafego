@@ -3,35 +3,56 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Arroz, Feijão e Tráfego — Juliano Streda</title>
+  <title>Arroz, Feijão e Tráfego Juliano Streda</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,300;1,14..32,400&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #ffffff;
-      --surface: #f5f5f7;
-      --text: #1d1d1f;
-      --text-secondary: #6e6e73;
-      --accent: #D4500A;
-      --accent-soft: rgba(212, 80, 10, 0.08);
-      --border: #d2d2d7;
-      --radius: 12px;
-      --max: 560px;
+      --bg: #fafaf9;
+      --white: #ffffff;
+      --text: #18181b;
+      --text-2: #71717a;
+      --text-3: #a1a1aa;
+      --accent: #c94a08;
+      --accent-soft: rgba(201,74,8,0.08);
+      --border: #e4e4e7;
+      --surface: #f4f4f5;
+      --max: 580px;
+      --radius: 14px;
     }
 
-    html {
-      scroll-behavior: smooth;
-      -webkit-text-size-adjust: 100%;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
-      font-size: 17px;
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-size: 16px;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
-      padding-bottom: env(safe-area-inset-bottom, 0px);
+      overflow-x: hidden;
+    }
+
+    /* ── ANIMAÇÕES ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+      will-change: opacity, transform;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
     }
 
     /* ── LAYOUT ── */
@@ -41,53 +62,106 @@
       padding: 0 24px;
     }
 
+    /* ── NAV ── */
+    nav {
+      padding: 20px 24px;
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .nav-logo span { color: var(--accent); }
+
+    .nav-cta {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent);
+      text-decoration: none;
+      padding: 8px 16px;
+      border: 1px solid var(--accent);
+      border-radius: 980px;
+      transition: background 0.15s, color 0.15s;
+    }
+    .nav-cta:hover { background: var(--accent); color: #fff; }
+
     /* ── HERO ── */
     .hero {
-      padding: 80px 24px 64px;
+      padding: 72px 24px 80px;
       max-width: var(--max);
       margin: 0 auto;
     }
 
-    .hero-tag {
-      display: inline-block;
-      font-size: 12px;
+    .hero-kicker {
+      font-size: 13px;
       font-weight: 500;
-      letter-spacing: 0.01em;
-      color: var(--accent);
+      color: var(--text-3);
       margin-bottom: 20px;
+      letter-spacing: 0.02em;
     }
 
     .hero h1 {
-      font-size: clamp(36px, 9vw, 52px);
+      font-size: clamp(34px, 8vw, 50px);
       font-weight: 700;
       letter-spacing: -0.03em;
-      line-height: 1.08;
+      line-height: 1.1;
       color: var(--text);
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
 
-    .hero p {
-      font-size: 19px;
-      color: var(--text-secondary);
-      line-height: 1.55;
-      max-width: 480px;
+    .hero h1 em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--text-2);
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      color: var(--text-2);
+      line-height: 1.65;
+      max-width: 460px;
       margin-bottom: 36px;
+      font-weight: 400;
     }
 
-    .hero-cta {
+    .hero-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .btn-primary {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: var(--accent);
+      background: var(--text);
       color: #fff;
       font-size: 15px;
       font-weight: 600;
-      padding: 14px 28px;
+      padding: 14px 26px;
       border-radius: 980px;
       text-decoration: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
       transition: opacity 0.15s;
     }
-    .hero-cta:hover { opacity: 0.88; }
+    .btn-primary:hover { opacity: 0.8; }
+
+    .hero-note {
+      font-size: 13px;
+      color: var(--text-3);
+      line-height: 1.5;
+    }
 
     /* ── VIDEO ── */
     .video-section {
@@ -96,384 +170,419 @@
       margin: 0 auto;
     }
 
-    .video-label {
+    .video-caption {
       font-size: 12px;
-      color: var(--text-secondary);
+      color: var(--text-3);
       margin-bottom: 12px;
       font-weight: 500;
+      letter-spacing: 0.02em;
     }
 
-    .video-frame {
+    .video-shell {
       width: 100%;
       aspect-ratio: 9/16;
-      max-height: 520px;
+      max-height: 500px;
       border-radius: var(--radius);
       overflow: hidden;
       background: var(--surface);
+      border: 1px solid var(--border);
     }
 
-    .video-frame iframe {
+    .video-shell iframe {
       width: 100%;
       height: 100%;
       border: none;
       display: block;
     }
 
-    /* ── DIVISOR ── */
-    .divider {
+    /* ── DIVIDER ── */
+    .div {
       height: 1px;
       background: var(--border);
       max-width: var(--max);
       margin: 0 auto;
     }
 
-    /* ── SEÇÃO ── */
+    /* ── SEÇÕES ── */
     .section {
-      padding: 64px 24px;
+      padding: 72px 24px;
       max-width: var(--max);
       margin: 0 auto;
     }
 
-    .section-eyebrow {
+    .label {
       font-size: 12px;
-      font-weight: 600;
-      color: var(--accent);
-      margin-bottom: 8px;
-      letter-spacing: 0.01em;
+      font-weight: 500;
+      color: var(--text-3);
+      letter-spacing: 0.04em;
+      margin-bottom: 10px;
     }
 
     .section h2 {
-      font-size: clamp(26px, 6vw, 34px);
+      font-size: clamp(24px, 5.5vw, 32px);
       font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1.12;
-      margin-bottom: 16px;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin-bottom: 14px;
+      color: var(--text);
+    }
+
+    .section h2 em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--text-2);
     }
 
     .section-body {
       font-size: 16px;
-      color: var(--text-secondary);
-      line-height: 1.65;
+      color: var(--text-2);
+      line-height: 1.7;
       margin-bottom: 32px;
     }
 
-    /* ── PARA QUEM ── */
-    .check-list {
-      list-style: none;
+    /* ── DORES ── */
+    .dores {
       display: flex;
       flex-direction: column;
-      gap: 14px;
-      margin-bottom: 0;
+      gap: 0;
     }
 
-    .check-list li {
+    .dor-item {
       display: flex;
       align-items: flex-start;
-      gap: 12px;
-      font-size: 16px;
-      color: var(--text);
-      line-height: 1.5;
+      gap: 16px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
     }
 
-    .check-list li::before {
-      content: '';
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: var(--accent-soft);
-      flex-shrink: 0;
-      margin-top: 2px;
-      background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='10' cy='10' r='10' fill='%23D4500A' fill-opacity='0.1'/%3E%3Cpath d='M6 10.5L8.5 13L14 7.5' stroke='%23D4500A' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-      background-size: contain;
+    .dor-item:first-child { border-top: 1px solid var(--border); }
+
+    .dor-num {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-3);
+      min-width: 20px;
+      padding-top: 2px;
+    }
+
+    .dor-text {
+      font-size: 15px;
+      color: var(--text);
+      line-height: 1.55;
     }
 
     /* ── PRODUTOS ── */
-    .produtos-grid {
+    .produtos {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 12px;
     }
 
-    .produto-card {
-      background: var(--surface);
+    .produto {
+      background: var(--white);
+      border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 28px 24px;
-      position: relative;
-      overflow: hidden;
+      padding: 24px;
+      transition: border-color 0.2s;
     }
 
-    .produto-card.destaque {
-      background: var(--text);
-      color: #fff;
+    .produto:hover { border-color: var(--text-3); }
+
+    .produto-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
     }
 
-    .produto-badge {
-      display: inline-block;
+    .produto-tipo {
       font-size: 11px;
       font-weight: 600;
-      letter-spacing: 0.04em;
-      padding: 4px 10px;
-      border-radius: 980px;
-      margin-bottom: 16px;
-      background: var(--accent-soft);
+      letter-spacing: 0.06em;
       color: var(--accent);
+      text-transform: uppercase;
     }
 
-    .produto-card.destaque .produto-badge {
-      background: rgba(212,80,10,0.2);
-      color: #ff8c5a;
+    .produto-preco {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      white-space: nowrap;
     }
 
-    .produto-card h3 {
-      font-size: 22px;
+    .produto h3 {
+      font-size: 19px;
       font-weight: 700;
       letter-spacing: -0.02em;
       margin-bottom: 8px;
+      color: var(--text);
     }
-
-    .produto-card.destaque h3 { color: #fff; }
-
-    .produto-preco {
-      font-size: 32px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: var(--accent);
-      margin-bottom: 12px;
-      line-height: 1;
-    }
-
-    .produto-card.destaque .produto-preco { color: #ff8c5a; }
 
     .produto-desc {
-      font-size: 15px;
-      color: var(--text-secondary);
-      line-height: 1.55;
-      margin-bottom: 20px;
+      font-size: 14px;
+      color: var(--text-2);
+      line-height: 1.6;
+      margin-bottom: 18px;
     }
-
-    .produto-card.destaque .produto-desc { color: rgba(255,255,255,0.65); }
 
     .btn-produto {
       display: inline-block;
       font-size: 14px;
       font-weight: 600;
-      padding: 11px 22px;
+      padding: 10px 20px;
       border-radius: 980px;
       text-decoration: none;
-      transition: opacity 0.15s;
       cursor: pointer;
       border: none;
+      font-family: inherit;
+      transition: opacity 0.15s, background 0.15s;
     }
 
-    .btn-produto:hover { opacity: 0.8; }
-
-    .btn-produto.outline {
-      border: 1.5px solid var(--accent);
-      color: var(--accent);
-      background: transparent;
+    .btn-ghost {
+      background: var(--surface);
+      color: var(--text);
     }
+    .btn-ghost:hover { opacity: 0.7; }
 
-    .btn-produto.filled {
-      background: var(--accent);
+    .btn-dark {
+      background: var(--text);
       color: #fff;
     }
+    .btn-dark:hover { opacity: 0.8; }
+
+    /* ── ENTREGÁVEIS ── */
+    .entregaveis {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .entrega {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .entrega-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .entrega-text strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .entrega-text span {
+      font-size: 13px;
+      color: var(--text-2);
+      line-height: 1.5;
+    }
+
+    /* ── SOBRE ── */
+    .sobre-text {
+      font-size: 16px;
+      color: var(--text-2);
+      line-height: 1.75;
+    }
+
+    .sobre-text + .sobre-text { margin-top: 14px; }
+    .sobre-text strong { color: var(--text); font-weight: 600; }
 
     /* ── MODAIS ── */
-    .modal-overlay {
+    .overlay {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.4);
-      backdrop-filter: blur(4px);
-      z-index: 100;
+      background: rgba(0,0,0,0.35);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 200;
       align-items: flex-end;
       justify-content: center;
-      padding: 0;
     }
+    .overlay.open { display: flex; }
 
-    .modal-overlay.open { display: flex; }
-
-    .modal {
-      background: var(--bg);
+    .sheet {
+      background: var(--white);
       width: 100%;
-      max-width: 560px;
+      max-width: 580px;
       border-radius: 20px 20px 0 0;
-      padding: 32px 24px calc(32px + env(safe-area-inset-bottom, 0px));
-      max-height: 90svh;
+      padding: 28px 24px calc(28px + env(safe-area-inset-bottom, 0px));
+      max-height: 92svh;
       overflow-y: auto;
     }
 
-    .modal-handle {
-      width: 36px;
+    .sheet-handle {
+      width: 32px;
       height: 4px;
       background: var(--border);
       border-radius: 2px;
       margin: 0 auto 24px;
     }
 
-    .modal h3 {
-      font-size: 22px;
+    .sheet h3 {
+      font-size: 20px;
       font-weight: 700;
       letter-spacing: -0.02em;
       margin-bottom: 6px;
     }
 
-    .modal-sub {
+    .sheet-sub {
       font-size: 14px;
-      color: var(--text-secondary);
-      margin-bottom: 28px;
+      color: var(--text-2);
       line-height: 1.5;
+      margin-bottom: 28px;
     }
 
     /* ── FORM ── */
-    .field {
-      margin-bottom: 18px;
-    }
+    .field { margin-bottom: 16px; }
 
     .field label {
       display: block;
       font-size: 13px;
       font-weight: 600;
+      margin-bottom: 6px;
       color: var(--text);
-      margin-bottom: 7px;
     }
 
     .field input,
-    .field textarea,
-    .field select {
+    .field textarea {
       width: 100%;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 10px;
-      padding: 13px 14px;
-      font-size: 16px;
+      padding: 12px 14px;
+      font-size: 15px;
       color: var(--text);
       font-family: inherit;
       outline: none;
       transition: border-color 0.15s;
-      appearance: none;
       -webkit-appearance: none;
     }
 
     .field input:focus,
-    .field textarea:focus,
-    .field select:focus {
-      border-color: var(--accent);
-    }
-
+    .field textarea:focus { border-color: var(--accent); }
     .field textarea { resize: vertical; min-height: 80px; }
 
-    .radio-group {
+    .radio-row {
       display: flex;
-      gap: 10px;
+      gap: 8px;
     }
 
-    .radio-opt {
+    .radio-pill {
       flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 7px;
+      gap: 6px;
       background: var(--surface);
       border: 1.5px solid var(--border);
       border-radius: 10px;
-      padding: 12px 10px;
-      font-size: 15px;
+      padding: 11px 8px;
+      font-size: 14px;
       font-weight: 500;
       cursor: pointer;
-      transition: border-color 0.15s, background 0.15s;
+      transition: border-color 0.15s, background 0.15s, color 0.15s;
       color: var(--text);
+      user-select: none;
     }
 
-    .radio-opt input { display: none; }
+    .radio-pill input[type="radio"] { display: none; }
 
-    .radio-opt.selected {
+    .radio-pill.on {
       border-color: var(--accent);
       background: var(--accent-soft);
       color: var(--accent);
     }
 
-    .btn-submit {
+    .btn-send {
       width: 100%;
-      background: var(--accent);
+      background: var(--text);
       color: #fff;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 600;
-      padding: 16px;
+      padding: 15px;
       border-radius: 980px;
       border: none;
       cursor: pointer;
       font-family: inherit;
-      transition: opacity 0.15s;
       margin-top: 8px;
+      transition: opacity 0.15s;
     }
+    .btn-send:hover { opacity: 0.82; }
+    .btn-send:disabled { opacity: 0.4; cursor: default; }
 
-    .btn-submit:hover { opacity: 0.88; }
-    .btn-submit:disabled { opacity: 0.5; cursor: default; }
-
-    .form-success {
+    .success-msg {
       display: none;
       text-align: center;
-      padding: 24px 0;
+      padding: 20px 0 8px;
     }
 
-    .form-success .icon { font-size: 48px; margin-bottom: 12px; }
+    .success-msg .s-icon { font-size: 44px; margin-bottom: 12px; }
 
-    .form-success h4 {
-      font-size: 20px;
+    .success-msg h4 {
+      font-size: 18px;
       font-weight: 700;
-      margin-bottom: 8px;
       letter-spacing: -0.01em;
+      margin-bottom: 8px;
     }
 
-    .form-success p { font-size: 15px; color: var(--text-secondary); line-height: 1.5; }
+    .success-msg p { font-size: 14px; color: var(--text-2); line-height: 1.55; }
 
-    /* ── SOBRE ── */
-    .sobre-box {
-      background: var(--surface);
-      border-radius: var(--radius);
-      padding: 28px 24px;
-    }
-
-    .sobre-box p {
-      font-size: 16px;
-      color: var(--text-secondary);
-      line-height: 1.65;
-    }
-
-    .sobre-box p + p { margin-top: 12px; }
-
-    .sobre-box strong { color: var(--text); font-weight: 600; }
-
-    /* ── RODAPÉ ── */
+    /* ── FOOTER ── */
     footer {
-      padding: 40px 24px;
+      padding: 48px 24px calc(48px + env(safe-area-inset-bottom, 0px));
       max-width: var(--max);
       margin: 0 auto;
-      text-align: center;
-      font-size: 13px;
-      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      * { transition: none !important; }
+    footer p {
+      font-size: 13px;
+      color: var(--text-3);
     }
   </style>
 </head>
 <body>
 
+<!-- NAV -->
+<nav class="reveal">
+  <span class="nav-logo">Juliano <span>Streda</span></span>
+  <a href="#opcoes" class="nav-cta">Ver opções</a>
+</nav>
+
 <!-- HERO -->
 <div class="hero">
-  <span class="hero-tag">Aulas de tráfego pago</span>
-  <h1>Aprenda a fazer tráfego pago do jeito certo.</h1>
-  <p>Para empreendedores que ainda não conseguem investir em um gestor ou agência — mas entendem que tráfego é necessário para crescer.</p>
-  <a href="#opcoes" class="hero-cta">Ver as opções</a>
+  <p class="hero-kicker reveal">Aulas de tráfego pago</p>
+  <h1 class="reveal reveal-delay-1">Aprenda a fazer<br>tráfego pago.<br><em>Do jeito certo.</em></h1>
+  <p class="hero-sub reveal reveal-delay-2">Para empreendedores que ainda não conseguem pagar um gestor ou agência mas entendem que tráfego é necessário para crescer.</p>
+  <div class="hero-actions reveal reveal-delay-3">
+    <a href="#opcoes" class="btn-primary">Ver as opções</a>
+    <p class="hero-note">Turma a R$750 · Individual a R$1.190</p>
+  </div>
 </div>
 
 <!-- VIDEO -->
-<div class="video-section">
-  <p class="video-label">Assiste antes de continuar</p>
-  <div class="video-frame">
+<div class="video-section reveal">
+  <p class="video-caption">Assiste antes de continuar</p>
+  <div class="video-shell">
     <iframe src="https://www.youtube.com/embed/4HQ8z1GcDJw?rel=0&playsinline=1"
       allowfullscreen
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
@@ -481,199 +590,222 @@
   </div>
 </div>
 
-<div class="divider"></div>
+<div class="div"></div>
 
 <!-- PARA QUEM -->
 <div class="section">
-  <p class="section-eyebrow">Para quem é</p>
-  <h2>Essas aulas são pra você?</h2>
-  <ul class="check-list">
-    <li>Você sabe que precisa de tráfego pago, mas R$1.500 por mês em gestor ainda não cabe no seu caixa</li>
-    <li>Você já jogou dinheiro fora impulsionando post sem entender o que estava fazendo</li>
-    <li>Seu negócio depende de indicação e orgânico — e você sabe que isso não escala</li>
-    <li>Você tentou cursinho barato e continuou perdido, sem saber se a campanha estava funcionando ou não</li>
-    <li>Você quer parar de depender de terceiros e ter controle sobre o que entra de cliente todo mês</li>
-  </ul>
-</div>
-
-<div class="divider"></div>
-
-<!-- OPÇÕES -->
-<div class="section" id="opcoes">
-  <p class="section-eyebrow">Como funciona</p>
-  <h2>Duas formas de aprender.</h2>
-  <p class="section-body">Escolha o formato que faz mais sentido pro seu momento.</p>
-
-  <div class="produtos-grid">
-
-    <!-- TURMA -->
-    <div class="produto-card">
-      <span class="produto-badge">Turma</span>
-      <h3>Aula em grupo</h3>
-      <div class="produto-preco">R$ 750</div>
-      <p class="produto-desc">
-        Quando fechar 10 alunos, a gente define juntos a melhor data e horário pra todo mundo. Você aprende ao lado de outros empreendedores e ainda troca experiência com quem está no mesmo momento que você.
-      </p>
-      <button class="btn-produto outline" onclick="abrirModal('modal-turma')">Reservar vaga na turma</button>
+  <p class="label reveal">Para quem é</p>
+  <h2 class="reveal reveal-delay-1">Isso aqui<br><em>é pra você?</em></h2>
+  <div class="dores">
+    <div class="dor-item reveal reveal-delay-1">
+      <span class="dor-num">01</span>
+      <p class="dor-text">Você sabe que precisa de tráfego pago, mas R$1.500 por mês em gestor ainda não cabe no seu caixa</p>
     </div>
-
-    <!-- INDIVIDUAL -->
-    <div class="produto-card destaque">
-      <span class="produto-badge">Individual</span>
-      <h3>Aula particular</h3>
-      <div class="produto-preco">R$ 1.190</div>
-      <p class="produto-desc">
-        Para quem tem urgência ou prefere atenção 100% focada no seu negócio. Antes de confirmar, responda algumas perguntas rápidas para eu entender seu momento.
-      </p>
-      <button class="btn-produto filled" onclick="abrirModal('modal-individual')">Quero fazer individual</button>
+    <div class="dor-item reveal reveal-delay-2">
+      <span class="dor-num">02</span>
+      <p class="dor-text">Você já jogou dinheiro fora impulsionando post sem entender o que estava fazendo</p>
     </div>
-
+    <div class="dor-item reveal reveal-delay-3">
+      <span class="dor-num">03</span>
+      <p class="dor-text">Seu negócio depende de indicação e orgânico e você sabe que isso não escala</p>
+    </div>
+    <div class="dor-item reveal reveal-delay-4">
+      <span class="dor-num">04</span>
+      <p class="dor-text">Você tentou cursinho barato e continuou perdido, sem saber se a campanha estava funcionando ou não</p>
+    </div>
+    <div class="dor-item reveal reveal-delay-5">
+      <span class="dor-num">05</span>
+      <p class="dor-text">Você quer parar de depender de terceiros e ter controle sobre o que entra de cliente todo mês</p>
+    </div>
   </div>
 </div>
 
-<div class="divider"></div>
+<div class="div"></div>
 
 <!-- ENTREGÁVEIS -->
 <div class="section">
-  <p class="section-eyebrow">O que você leva</p>
-  <h2>Além das aulas.</h2>
-  <ul class="check-list">
-    <li>Prompt de IA que gera roteiros de Reels para qualquer modelo de negócio</li>
-    <li>Prompt de IA para definir seu cliente ideal (ICP)</li>
-    <li>Auxílio de IA para montar campanhas e estratégias de marketing</li>
-    <li>Material complementar das aulas para consultar depois</li>
-    <li>Encontro no Meet 30 dias depois para acompanhar como estão seus resultados</li>
-    <li>Grupo exclusivo para tirar dúvidas comigo</li>
-  </ul>
-</div>
+  <p class="label reveal">O que você leva</p>
+  <h2 class="reveal reveal-delay-1">Além<br><em>das aulas.</em></h2>
 
-<div class="divider"></div>
-
-<!-- SOBRE -->
-<div class="section">
-  <p class="section-eyebrow">Quem vai te ensinar</p>
-  <h2>Juliano Streda</h2>
-  <div class="sobre-box">
-    <p>Sou gestor de tráfego e dono de loja de iPhone aqui no RS. Trabalho com Meta Ads no dia a dia — não só ensino teoria, faço campanhas de verdade para negócios reais.</p>
-    <p>Criei essas aulas porque vi que a maioria dos empreendedores fica preso entre pagar caro por um gestor ou não fazer tráfego nenhum. <strong>Existe um caminho do meio.</strong></p>
-  </div>
-</div>
-
-<footer>
-  Arroz, Feijão e Tráfego · Juliano Streda
-</footer>
-
-<!-- MODAL TURMA -->
-<div class="modal-overlay" id="modal-turma" onclick="fecharSeOverlay(event, 'modal-turma')">
-  <div class="modal">
-    <div class="modal-handle"></div>
-    <h3>Reservar vaga na turma</h3>
-    <p class="modal-sub">Quando fechar 10 alunos, a gente define a melhor data juntos. Deixa seu contato que eu te chamo.</p>
-
-    <form id="form-turma">
-      <input type="hidden" name="access_key" value="36c33878-46b2-4abe-9edb-8d35fc097373" />
-      <input type="hidden" name="subject" value="Nova reserva — Turma Arroz Feijão e Tráfego" />
-
-      <div class="field">
-        <label>Seu nome</label>
-        <input type="text" name="nome" placeholder="Como você se chama?" required />
+  <div class="entregaveis">
+    <div class="entrega reveal reveal-delay-1">
+      <div class="entrega-icon">🤖</div>
+      <div class="entrega-text">
+        <strong>Prompt de IA para Reels</strong>
+        <span>Gera roteiros de Reels para qualquer modelo de negócio.</span>
       </div>
-
-      <div class="field">
-        <label>WhatsApp</label>
-        <input type="tel" name="whatsapp" placeholder="(00) 00000-0000" required />
+    </div>
+    <div class="entrega reveal reveal-delay-2">
+      <div class="entrega-icon">🎯</div>
+      <div class="entrega-text">
+        <strong>Prompt de IA para definir seu ICP</strong>
+        <span>Descubra com precisão quem é seu cliente ideal.</span>
       </div>
-
-      <div class="field">
-        <label>Você tem um negócio funcionando?</label>
-        <div class="radio-group">
-          <label class="radio-opt" onclick="selecionarRadio(this, 'negocio-turma')">
-            <input type="radio" name="negocio" value="Sim" /> Sim
-          </label>
-          <label class="radio-opt" onclick="selecionarRadio(this, 'negocio-turma')">
-            <input type="radio" name="negocio" value="Não" /> Não
-          </label>
-        </div>
+    </div>
+    <div class="entrega reveal reveal-delay-3">
+      <div class="entrega-icon">📊</div>
+      <div class="entrega-text">
+        <strong>IA para campanhas e estratégias</strong>
+        <span>Auxílio de IA para montar e analisar campanhas de tráfego.</span>
       </div>
-
-      <button type="submit" class="btn-submit" id="btn-turma">Reservar minha vaga</button>
-    </form>
-
-    <div class="form-success" id="success-turma">
-      <div class="icon">✅</div>
-      <h4>Reserva feita!</h4>
-      <p>Boa! Vou te chamar no WhatsApp assim que a turma estiver perto de fechar.</p>
+    </div>
+    <div class="entrega reveal reveal-delay-4">
+      <div class="entrega-icon">📄</div>
+      <div class="entrega-text">
+        <strong>Material complementar</strong>
+        <span>Guia completo para consultar depois das aulas.</span>
+      </div>
+    </div>
+    <div class="entrega reveal reveal-delay-5">
+      <div class="entrega-icon">📅</div>
+      <div class="entrega-text">
+        <strong>Encontro no Meet após 30 dias</strong>
+        <span>A gente se reúne para acompanhar como estão seus resultados.</span>
+      </div>
+    </div>
+    <div class="entrega reveal">
+      <div class="entrega-icon">💬</div>
+      <div class="entrega-text">
+        <strong>Grupo exclusivo de alunos</strong>
+        <span>Para tirar dúvidas comigo e trocar com outros empreendedores.</span>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- MODAL INDIVIDUAL -->
-<div class="modal-overlay" id="modal-individual" onclick="fecharSeOverlay(event, 'modal-individual')">
-  <div class="modal">
-    <div class="modal-handle"></div>
-    <h3>Aula individual</h3>
-    <p class="modal-sub">Responde algumas perguntas rápidas. Assim eu já entendo seu momento antes de entrar em contato.</p>
 
-    <form id="form-individual">
+<div class="div"></div>
+
+<!-- OPÇÕES -->
+<div class="section" id="opcoes">
+  <p class="label reveal">Como funciona</p>
+  <h2 class="reveal reveal-delay-1">Duas formas<br><em>de aprender.</em></h2>
+  <p class="section-body reveal reveal-delay-2">Escolha o que faz mais sentido pro seu momento.</p>
+
+  <div class="produtos">
+
+    <div class="produto reveal reveal-delay-2">
+      <div class="produto-top">
+        <span class="produto-tipo">Turma</span>
+        <span class="produto-preco">R$ 750</span>
+      </div>
+      <h3>Aula em grupo</h3>
+      <p class="produto-desc">Quando fechar 10 alunos, a gente define juntos a melhor data e horário pra todo mundo. Você aprende ao lado de outros empreendedores no mesmo momento que você.</p>
+      <button class="btn-produto btn-ghost" onclick="abrirSheet('sheet-turma')">Reservar vaga na turma</button>
+    </div>
+
+    <div class="produto reveal reveal-delay-3">
+      <div class="produto-top">
+        <span class="produto-tipo">Individual</span>
+        <span class="produto-preco">R$ 1.190</span>
+      </div>
+      <h3>Aula particular</h3>
+      <p class="produto-desc">Para quem tem urgência ou prefere atenção 100% focada no seu negócio. Responda algumas perguntas rápidas e eu entro em contato.</p>
+      <button class="btn-produto btn-dark" onclick="abrirSheet('sheet-individual')">Quero fazer individual</button>
+    </div>
+
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- SOBRE -->
+<div class="section">
+  <p class="label reveal">Quem vai te ensinar</p>
+  <h2 class="reveal reveal-delay-1">Juliano Streda</h2>
+  <p class="sobre-text reveal reveal-delay-2">Empreendo há 5 anos e sei o quanto é importante ter um canal de aquisição pago. <strong>Nós empreendedores não podemos ficar dependendo 100% de indicação ou sorte.</strong> Por isso aprendi a fazer tráfego e hoje presto esse serviço para diversas empresas de diferentes ramos.</p>
+  <p class="sobre-text reveal reveal-delay-3" style="margin-top:14px;">Vou te ensinar de um jeito prático e fácil como fazer seus primeiros anúncios, gerando mais vendas para o seu modelo de negócio.</p>
+</div>
+
+<footer>
+  <p>Arroz, Feijão e Tráfego</p>
+  <p>Juliano Streda</p>
+</footer>
+
+<!-- SHEET TURMA -->
+<div class="overlay" id="sheet-turma" onclick="fecharSeOverlay(event,'sheet-turma')">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <h3>Reservar vaga na turma</h3>
+    <p class="sheet-sub">Quando fechar 10 alunos a gente define a data juntos. Deixa seu contato que eu te chamo.</p>
+
+    <form id="form-turma">
       <input type="hidden" name="access_key" value="36c33878-46b2-4abe-9edb-8d35fc097373" />
-      <input type="hidden" name="subject" value="Interesse individual — Arroz Feijão e Tráfego" />
+      <input type="hidden" name="subject" value="Reserva Turma Arroz Feijão e Tráfego" />
 
       <div class="field">
         <label>Seu nome</label>
         <input type="text" name="nome" placeholder="Como você se chama?" required />
       </div>
-
       <div class="field">
         <label>WhatsApp</label>
         <input type="tel" name="whatsapp" placeholder="(00) 00000-0000" required />
       </div>
+      <div class="field">
+        <label>Você tem um negócio funcionando?</label>
+        <div class="radio-row">
+          <label class="radio-pill" onclick="pill(this)"><input type="radio" name="negocio_t" value="Sim" /> Sim</label>
+          <label class="radio-pill" onclick="pill(this)"><input type="radio" name="negocio_t" value="Não" /> Não</label>
+        </div>
+      </div>
+      <button type="submit" class="btn-send" id="btn-t">Reservar minha vaga</button>
+    </form>
+    <div class="success-msg" id="ok-turma">
+      <div class="s-icon">✅</div>
+      <h4>Reserva feita!</h4>
+      <p>Vou te chamar no WhatsApp assim que a turma estiver perto de fechar.</p>
+    </div>
+  </div>
+</div>
 
+<!-- SHEET INDIVIDUAL -->
+<div class="overlay" id="sheet-individual" onclick="fecharSeOverlay(event,'sheet-individual')">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <h3>Aula individual</h3>
+    <p class="sheet-sub">Responde algumas perguntas rápidas. Assim eu já entendo seu momento antes de entrar em contato.</p>
+
+    <form id="form-ind">
+      <input type="hidden" name="access_key" value="36c33878-46b2-4abe-9edb-8d35fc097373" />
+      <input type="hidden" name="subject" value="Individual Arroz Feijão e Tráfego" />
+
+      <div class="field">
+        <label>Seu nome</label>
+        <input type="text" name="nome" placeholder="Como você se chama?" required />
+      </div>
+      <div class="field">
+        <label>WhatsApp</label>
+        <input type="tel" name="whatsapp" placeholder="(00) 00000-0000" required />
+      </div>
       <div class="field">
         <label>Você já tem um negócio funcionando?</label>
-        <div class="radio-group" id="negocio-ind">
-          <label class="radio-opt" onclick="selecionarRadio(this, 'negocio-ind')">
-            <input type="radio" name="negocio_ind" value="Sim" /> Sim
-          </label>
-          <label class="radio-opt" onclick="selecionarRadio(this, 'negocio-ind')">
-            <input type="radio" name="negocio_ind" value="Não" /> Não
-          </label>
+        <div class="radio-row">
+          <label class="radio-pill" onclick="pill(this)"><input type="radio" name="negocio_i" value="Sim" /> Sim</label>
+          <label class="radio-pill" onclick="pill(this)"><input type="radio" name="negocio_i" value="Não" /> Não</label>
         </div>
       </div>
-
       <div class="field">
         <label>Você já tentou fazer tráfego pago antes?</label>
-        <div class="radio-group" id="trafego-ind">
-          <label class="radio-opt" onclick="selecionarRadio(this, 'trafego-ind')">
-            <input type="radio" name="trafego_ind" value="Sim" /> Sim
-          </label>
-          <label class="radio-opt" onclick="selecionarRadio(this, 'trafego-ind')">
-            <input type="radio" name="trafego_ind" value="Não" /> Não
-          </label>
+        <div class="radio-row">
+          <label class="radio-pill" onclick="pill(this)"><input type="radio" name="trafego_i" value="Sim" /> Sim</label>
+          <label class="radio-pill" onclick="pill(this)"><input type="radio" name="trafego_i" value="Não" /> Não</label>
         </div>
       </div>
-
       <div class="field">
         <label>Por que quer aprender ao invés de contratar um gestor?</label>
         <textarea name="motivo" placeholder="Me conta seu raciocínio..." required></textarea>
       </div>
-
       <div class="field">
-        <label>No seu momento, você investiria R$1.000 em um gestor ou aprenderia a habilidade?</label>
-        <div class="radio-group" id="decisao-ind">
-          <label class="radio-opt" onclick="selecionarRadio(this, 'decisao-ind')">
-            <input type="radio" name="decisao_ind" value="Contrataria gestor" /> Contrataria gestor
-          </label>
-          <label class="radio-opt" onclick="selecionarRadio(this, 'decisao-ind')">
-            <input type="radio" name="decisao_ind" value="Aprenderia" /> Aprenderia
-          </label>
+        <label>No seu momento, você investiria R$1.000 em gestor ou aprenderia a habilidade?</label>
+        <div class="radio-row">
+          <label class="radio-pill" onclick="pill(this)"><input type="radio" name="decisao_i" value="Contrataria gestor" /> Contrataria gestor</label>
+          <label class="radio-pill" onclick="pill(this)"><input type="radio" name="decisao_i" value="Aprenderia" /> Aprenderia</label>
         </div>
       </div>
-
-      <button type="submit" class="btn-submit" id="btn-individual">Enviar</button>
+      <button type="submit" class="btn-send" id="btn-i">Enviar</button>
     </form>
-
-    <div class="form-success" id="success-individual">
-      <div class="icon">✅</div>
+    <div class="success-msg" id="ok-ind">
+      <div class="s-icon">✅</div>
       <h4>Respostas recebidas!</h4>
       <p>Vou analisar seu perfil e entrar em contato pelo WhatsApp em breve.</p>
     </div>
@@ -681,11 +813,19 @@
 </div>
 
 <script>
-  function abrirModal(id) {
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Sheet
+  function abrirSheet(id) {
     document.getElementById(id).classList.add('open');
     document.body.style.overflow = 'hidden';
   }
-
   function fecharSeOverlay(e, id) {
     if (e.target === document.getElementById(id)) {
       document.getElementById(id).classList.remove('open');
@@ -693,47 +833,32 @@
     }
   }
 
-  function selecionarRadio(el, groupId) {
-    const group = el.closest('.radio-group') || document.getElementById(groupId);
-    if (!group) return;
-    group.querySelectorAll('.radio-opt').forEach(o => o.classList.remove('selected'));
-    el.classList.add('selected');
+  // Radio pills
+  function pill(el) {
+    const row = el.closest('.radio-row');
+    row.querySelectorAll('.radio-pill').forEach(p => p.classList.remove('on'));
+    el.classList.add('on');
     el.querySelector('input').checked = true;
   }
 
-  async function enviarForm(formId, btnId, successId) {
+  // Form submit
+  async function enviar(formId, btnId, okId) {
     const form = document.getElementById(formId);
     const btn  = document.getElementById(btnId);
     btn.disabled = true;
     btn.textContent = 'Enviando...';
     try {
-      const res = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        body: new FormData(form)
-      });
-      const data = await res.json();
-      if (data.success) {
+      const r = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(form) });
+      const d = await r.json();
+      if (d.success) {
         form.style.display = 'none';
-        document.getElementById(successId).style.display = 'block';
-      } else {
-        btn.textContent = 'Erro — tenta de novo';
-        btn.disabled = false;
-      }
-    } catch {
-      btn.textContent = 'Erro — tenta de novo';
-      btn.disabled = false;
-    }
+        document.getElementById(okId).style.display = 'block';
+      } else { btn.textContent = 'Erro tenta de novo'; btn.disabled = false; }
+    } catch { btn.textContent = 'Erro tenta de novo'; btn.disabled = false; }
   }
 
-  document.getElementById('form-turma').addEventListener('submit', e => {
-    e.preventDefault();
-    enviarForm('form-turma', 'btn-turma', 'success-turma');
-  });
-
-  document.getElementById('form-individual').addEventListener('submit', e => {
-    e.preventDefault();
-    enviarForm('form-individual', 'btn-individual', 'success-individual');
-  });
+  document.getElementById('form-turma').addEventListener('submit', e => { e.preventDefault(); enviar('form-turma','btn-t','ok-turma'); });
+  document.getElementById('form-ind').addEventListener('submit', e => { e.preventDefault(); enviar('form-ind','btn-i','ok-ind'); });
 </script>
 </body>
 </html>
